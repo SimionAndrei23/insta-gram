@@ -1,0 +1,40 @@
+
+html {
+  overflow-y:   scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.reelsContainer::-webkit-scrollbar
+{
+  display: none;
+}
+
+.reelsContainer {
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.facebookButton {
+
+  background-color: #045de9;
+  background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+  flex: 1;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  text-align: center;
+  color: #fff;
+  border-radius: 9999px;
+  transition: all 0.5s ease-out;
+  transform: scale(1);
+}
+
+.facebookButton:hover {
+  transform: scale(1.05);
+} 
+
+
+

@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .navButton {
+
+        @apply 
+        
+        hidden h-7 w-7 md:inline-flex
+        cursor-pointer hover:scale-125 transition-all
+        duration-150 ease-out;
+    }
+
+    .buttonIcon {
+
+        @apply h-7 w-7 hover:scale-125 transition-all duration-150 ease-out cursor-pointer;
+
+    }
+
+    .containerDesktop {
+
+        @apply relative flex items-center  gap-3 cursor-pointer; 
+    }
+
+    .iconActive {
+
+        @apply w-8 h-8  text-blue-400 cursor-pointer;
+    }
+
+    .iconInactive {
+
+        @apply w-8 h-8  text-gray-400 cursor-pointer;
+    }
+
+    .iconDesktopActive {
+        
+        @apply w-5 h-5 text-black cursor-pointer;
+    }
+
+    .iconDesktop {
+
+        @apply w-5 h-5 text-gray-400 cursor-pointer;
+
+    }
+
+    .statsHorizontal {
+        @apply py-4 flex items-center justify-center border-b cursor-pointer transition transform duration-500 hover:bg-gray-100;
+    }
+
+    .iconsReels {
+        @apply w-6 h-6 text-white cursor-pointer;
+    }
+
+    .content-container {
+        height: calc(100vh - theme('spacing.20'));
+    }
+
+    .clipPath1 {
+        clip-path: polygon(0 0, 0% 100%, 100% 100%);
+        background-color: rgba(0,0,0,0.03);
+    }
+
+    .clipPath2 {
+        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        background-color: rgba(0,0,0,0.03);
+    }
+
+    .clipPath3 {
+        clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+        background-color: rgba(0,0,0,0.03);
+    }
+
+    .coloredBorder {
+
+        border-width: 3px;
+        border-style: solid;
+        border-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+        border-image-slice: 1;
+        transition: all 0.5s ease-in-out;
+    
+    }
+
+    .coloredBorderReversed {
+
+        border-width: 3px;
+        border-style: solid;
+        border-image: linear-gradient(135deg, #FBDA61 0%, #FF5ACD 100% );
+        border-image-slice: 1;
+        transition: all 0.5s ease-in-out;
+    
+    }
+
+    .scrollBar {
+
+        background-color: #FF9A8B;
+        background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+      }
+      
+      .transformWidth {
+        transition: width 0.2s ease-out;
+      }
+      
+}
+
+@layer utilities {
+    .scroll-snap-none {
+      scroll-snap-type: none;
+    }
+    .scroll-snap-x {
+      scroll-snap-type: x;
+    }
+    .scroll-snap-y {
+      scroll-snap-type: y;
+    }
+  }
