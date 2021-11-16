@@ -13,7 +13,7 @@ const ProfileStats = ( {postLine, postSaved,tagged} ) => {
     const  router  = useRouter()
 
     return (
-        <div className = 'flex flex-col   max-w-4xl mx-auto w-full'>
+        <div className = 'flex flex-col pt-2   max-w-4xl mx-auto w-full'>
               <div className = 'flex items-center justify-evenly md:items-center md:justify-start  md:gap-20 gap-5 py-5 px-3  md:ml-20 pb-12'>
                   <div className = 'relative w-16 h-16 md:w-20 md:h-20'>
                       <img className = 'absolute w-full h-full rounded-full object-cover cursor-pointer' src = {user?.photo || userFacebook?.photo} alt = 'userImage' />

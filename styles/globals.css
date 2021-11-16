@@ -54,53 +54,10 @@
     }
 
     .content-container {
-        height: calc(100vh - theme('spacing.20'));
+        height: calc(100vh - theme('spacing.24'));
     }
 
-    .clipPath1 {
-        clip-path: polygon(0 0, 0% 100%, 100% 100%);
-        background-color: rgba(0,0,0,0.03);
-    }
-
-    .clipPath2 {
-        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-        background-color: rgba(0,0,0,0.03);
-    }
-
-    .clipPath3 {
-        clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
-        background-color: rgba(0,0,0,0.03);
-    }
-
-    .coloredBorder {
-
-        border-width: 3px;
-        border-style: solid;
-        border-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
-        border-image-slice: 1;
-        transition: all 0.5s ease-in-out;
     
-    }
-
-    .coloredBorderReversed {
-
-        border-width: 3px;
-        border-style: solid;
-        border-image: linear-gradient(135deg, #FBDA61 0%, #FF5ACD 100% );
-        border-image-slice: 1;
-        transition: all 0.5s ease-in-out;
-    
-    }
-
-    .scrollBar {
-
-        background-color: #FF9A8B;
-        background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
-      }
-      
-      .transformWidth {
-        transition: width 0.2s ease-out;
-      }
       
 }
 

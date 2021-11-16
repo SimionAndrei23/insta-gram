@@ -144,20 +144,18 @@ const Header = ({dataValue,icon, name }) => {
 
 
     return (
-        <div className = 'fixed w-full top-0 h-18 z-40 shadow-sm border-b py-1 bg-gradient-to-r from-pink-100 to-red-200'>
-
+        <div className = 'sticky w-full inset-0 h-18 z-40 shadow-xl border-b py-1 headerColor'>
+            <div className = 'belowHeader absolute -bottom-3 left-0 w-full h-4 '></div>
            <div className = 'flex items-center justify-between max-w-6xl px-5 md:mx-auto'>
 
                 {/* Left */}
 
-                <span> {dataValue} </span>
-
                 <div className = 'relative w-24 mt-2 hidden md:inline-grid cursor-pointer' onClick = { () => router.push('/')}>
-                    <LazyLoadImage className = 'w-full h-full object-cover' effect = 'blur' src  = 'https://i.ibb.co/2SCrBJD/instagram-text-removebg-preview.png' alt = 'InstagramLogo'/>
+                    <LazyLoadImage className = 'w-full h-full object-cover' src  = 'https://i.ibb.co/2SCrBJD/instagram-text-removebg-preview.png' alt = 'InstagramLogo'/>
                 </div>
 
                 <div className = 'relative w-8 mt-2 md:hidden flex-shrink-0 cursor-pointer' onClick = { () => router.push('/')}>
-                <LazyLoadImage className = 'w-full h-full object-cover' effect = 'blur' src  = 'https://i.ibb.co/NTKWQLC/logo-instacheck-removebg-preview.png' alt = 'InstagramLogo'/>
+                    <LazyLoadImage className = 'w-full h-full object-cover' src  = 'https://i.ibb.co/NTKWQLC/logo-instacheck-removebg-preview.png' alt = 'InstagramLogo'/>
                 </div>
 
                 {/* Middle - Search input field  */}
@@ -172,8 +170,8 @@ const Header = ({dataValue,icon, name }) => {
                         { inputFocus ? <XIcon className = 'absolute top-6 right-8 text-gray-400  h-4 w-4 ml-3 cursor-pointer' /> : null}
                     </div>
                     
-                    <div className = {`${(inputFocus || inputRef) ? 'absolute top-[4.5rem] -inset-x-6   md:inset-x-12 w-80 h-50 bg-gradient-to-r from-pink-100 to-purple-100 shadow-lg border rounded-md' : 'hidden'}`} onClick = { (e) => closeModal(e)}>
-                        <div className = 'absolute -top-2 left-36 z-10 w-4 h-4  rotate-45 bg-gradient-to-r from-pink-100 to-purple-100'></div>
+                    <div className = {`${(inputFocus || inputRef) ? 'absolute top-[4.5rem]  -inset-x-6   md:inset-x-12 w-72 md:w-80 h-50 bg-gradient-to-r from-pink-100 to-purple-100 shadow-lg border rounded-md' : 'hidden'}`} onClick = { (e) => closeModal(e)}>
+                        <div className = 'absolute -top-2 left-28 md:left-40 z-10 w-4 h-4  rotate-45 bg-gradient-to-r from-pink-100 to-purple-100'></div>
                         <div className = 'flex flex-col py-4 h-96  scrollbar-thin'>
                            {
                                loadingInput ? (
@@ -215,8 +213,8 @@ const Header = ({dataValue,icon, name }) => {
 
                 <div className = 'relative flex items-center space-x-6'>
 
-                        <div className = {`${modalHeart ? 'absolute top-14 -left-80 md:-left-40 w-96 h-96 bg-white rounded-md shadow-lg' : 'hidden'}`}>
-                            <div className = 'md:absolute right-[4.5rem] -top-2 w-4 h-4 rotate-45 bg-white'></div>
+                        <div className = {`${modalHeart ? 'absolute top-14 -left-60 md:-left-40 w-80 h-80 md:w-96 md:h-96 bg-white rounded-md shadow-lg' : 'hidden'}`}>
+                            <div className = 'hidden md:inline-flex absolute -top-2 right-[4.5rem] w-4 h-4 rotate-45 bg-white'></div>
                             {
                                 loadingHeart ? (
                                     <div className = 'flex items-center justify-center w-full h-full'>
@@ -265,7 +263,8 @@ const Header = ({dataValue,icon, name }) => {
                         <MenuIcon onClick = { () => setMenuModal(!menuModal)} className = 'h-7 inline-flex md:hidden cursor-pointer transform transition duration-1000 ease-out' />
                     )}
 
-                    <div className = {`${menuModal ? 'absolute top-20 -left-60 w-72 bg-white rounded-md shadow-lg' : 'hidden'}`}>
+                    <div className = {`${menuModal ? 'absolute top-12 -left-60 w-72 bg-white rounded-md shadow-lg' : 'hidden'}`}>
+                        <div className = 'absolute -top-2 right-6 w-4 h-4 rotate-45 bg-white'></div>
                         <div className = 'flex flex-col justify-center md:hidden'>
                             {data.map((icon,index) => (
                                 <div className = 'flex items-center gap-4 p-4 transition duration-700 ease-out hover:bg-gray-100 cursor-pointer' onClick = {() => setActiveTab(icon.name)} key = {index}>
@@ -312,9 +311,9 @@ const Header = ({dataValue,icon, name }) => {
                            <LazyLoadImage  src = 'https://i.ibb.co/ysJmcnf/placeholder-removebg-preview.png' alt = 'PlaceholderUser' />
                         </div>
                     )}
-                    <span className = {`${headerContainer ? 'absolute top-14 right-2 w-4 h-4 rotate-45 bg-gray-100 border' : 'hidden'}`}></span>
 
-                    <div className = {`${headerContainer ? 'absolute z-50 top-16 -left-48 md:left-5  rounded-md w-72 h-auto shadow-2xl bg-gradient-to-r from-pink-100 to-white border' : 'hidden'}`}>
+                    <div className = {`${headerContainer ? 'absolute z-50 top-14 -left-48 md:left-5  rounded-md w-72 h-auto shadow-2xl bg-gradient-to-r from-pink-100 to-white border' : 'hidden'}`}>
+                        <div className = 'absolute -top-2 right-6 w-4 h-4 rotate-45 bg-gradient-to-r from-pink-50 to-white'></div>
                         <Fade>
                             <div className = 'flex flex-col'>
                                 <div className="flex items-center p-3 cursor-pointer hover:bg-gray-50" onClick = { () => router.push(`/component/profile/${user?.uid || userFacebook?.uid}`)}>

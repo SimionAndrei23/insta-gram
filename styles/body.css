@@ -34,7 +34,62 @@ html {
 
 .facebookButton:hover {
   transform: scale(1.05);
-} 
+}
+
+.clipPath1 {
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  background-color: rgba(0,0,0,0.03);
+}
+
+.clipPath2 {
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  background-color: rgba(0,0,0,0.03);
+}
+
+.clipPath3 {
+  clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+  background-color: rgba(0,0,0,0.03);
+}
+
+.coloredBorder {
+
+  border-width: 3px;
+  border-style: solid;
+  border-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+  border-image-slice: 1;
+  transition: all 0.5s ease-in-out;
+
+}
+
+.coloredBorderReversed {
+
+  border-width: 3px;
+  border-style: solid;
+  border-image: linear-gradient(135deg, #FBDA61 0%, #FF5ACD 100% );
+  border-image-slice: 1;
+  transition: all 0.5s ease-in-out;
+
+}
+
+.scrollBar {
+
+  background-color: #FF9A8B;
+  background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+}
+
+.transformWidth {
+  transition: width 0.2s ease-out;
+}
+
+.headerColor {
+  background-color: #FFC0CB;
+  background-image: linear-gradient(275deg,  #FFC0CB 100%);
+}
+
+.belowHeader {
+  background: linear-gradient(-135deg, #FFC0CB 12px, transparent 0%), linear-gradient(135deg,#FFC0CB 12px, transparent 0%);
+  background-size: 20px;
+}
 
 
 

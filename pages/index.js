@@ -53,7 +53,7 @@ export default function Home() {
 
 
   return (
-    <div ref = {parentRef}  className='min-h-screen w-full scrollbar-thin bg-gradient-to-r from-pink-100 to-white'>
+    <div ref = {parentRef}  className='min-h-screen w-full bg-gradient-to-r from-pink-100 to-white'>
       <div style = {{'width': percentageWidth + '%'}} className = 'scrollBar fixed z-50 top-0 left-0 bg-red-500 h-[0.3rem] transformWidth'></div>
           <div>
             <Head>

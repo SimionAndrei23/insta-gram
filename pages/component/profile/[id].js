@@ -25,11 +25,11 @@ const profile = () => {
     ),[db, user,userFacebook])
 
     return (
-        <div className = ' min-h-screen pt-24 transition duration-1000 ease-in-out bg-gradient-to-r from-pink-100 via-purple-50 to-white'>
+        <div className = ' min-h-screen  transition duration-1000 ease-in-out bg-gradient-to-r from-pink-100 via-purple-50 to-white'>
             <Header />
             <ProfileStats postLine />
-            <div className = 'max-w-4xl mx-auto w-full h-full'>
-                <div className = 'flex flex-1 flex-wrap items-center gap-2 px-6 md:px-2  md:gap-2 pb-10'>
+            <div className = 'flex flex-col max-w-4xl md:mx-auto w-full h-full'>
+                <div className = 'flex flex-wrap items-center justify-center gap-2 px-10 md:px-2  md:gap-2 pb-10'>
                     {postsProfile?.map((post, index) => (
                         <PostsProfile key = {index} id = {index} img = {post.data().image}  />
                     ))}   

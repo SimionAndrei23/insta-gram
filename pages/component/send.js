@@ -31,9 +31,9 @@ const send = () => {
         
         <div>
             <Header icon = {icon} />
-            <div className = 'content-container w-full mt-20  p-[20px] '>
+            <div className = 'content-container w-full mt-1  p-[20px] '>
                 <div className = 'h-full w-full overflow-hidden  flex rounded-ms border shadow-lg max-w-3xl md:max-w-5xl md:mx-auto'>
-                    <div className = 'w-full md:w-1/3 h-full border-r'>
+                    <div className = 'w-full  md:w-1/3 h-full border-r'>
                         <div className = 'flex items-center justify-between p-4 border-b'>
                             <span classname = 'hidden md:inline-flex'></span>
                             <div className = 'flex items-center gap-2'>
@@ -62,7 +62,7 @@ const send = () => {
                             </div>
                         </div>
                     </div>
-                    <div className = 'flex items-center justify-center w-full h-full py-10 md:w-2/3'>
+                    <div iv className = 'hidden md:flex items-center justify-center w-full h-full py-10 md:w-2/3'>
                         <div className = 'flex items-center justify-center'>
                             <div className = 'flex flex-col items-center gap-4 px-4'>
                                 <div className = ' flex items-center justify-center w-32 h-32 rounded-full border border-black bg-opacity-40'>

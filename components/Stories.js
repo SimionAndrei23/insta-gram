@@ -32,7 +32,7 @@ function Stories() {
     },[])
 
     return (
-        <div className = 'flex flex-col space-x-2 p-6 mt-28 bg-white border border-gray-200  rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-red-200 shadow-md'>
+        <div className = 'flex flex-col space-x-2 p-6 mt-10 bg-white border border-gray-200  rounded-sm overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-red-200 shadow-md'>
             {
                 loadingStory ? (
                 <div className = 'flex items-center justify-center '>

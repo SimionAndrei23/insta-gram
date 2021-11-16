@@ -18,11 +18,11 @@ const saved = () => {
     },[db])
 
     return (
-        <div className = 'min-h-screen pt-24 transition duration-1000 ease-in-out  bg-gradient-to-r from-pink-100 via-purple-50 to-white'>
+        <div className = 'min-h-screen transition duration-1000 ease-in-out  bg-gradient-to-r from-pink-100 via-purple-50 to-white'>
             <Header />
             <ProfileStats postSaved />
             <div className = 'flex flex-col max-w-4xl mx-auto w-full h-full'>
-                <div className = 'flex flex-wrap items-center gap-2 px-4  md:gap-3 pb-10'>
+                <div className = 'flex flex-wrap items-center justify-center gap-2 px-10 md:px-0  md:gap-3 pb-10'>
                     {totalPosts?.map((post, index) => (
                         <PostSaved key = {index} id = {post.id}  />
                     ))}     

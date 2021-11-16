@@ -22,7 +22,7 @@ const savedPosts = () => {
    },[])
 
     return (
-        <div className = 'min-h-screen mt-20 overflow-y-auto'>
+        <div className = 'min-h-screen  overflow-y-auto'>
             <Header />
             <div className = 'mt-10'>
                <div className = 'flex flex-col max-w-6xl w-full h-full mx-auto'>
