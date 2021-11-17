@@ -170,8 +170,8 @@ const Header = ({dataValue,icon, name }) => {
                         { inputFocus ? <XIcon className = 'absolute top-6 right-8 text-gray-400  h-4 w-4 ml-3 cursor-pointer' /> : null}
                     </div>
                     
-                    <div className = {`${(inputFocus || inputRef) ? 'absolute top-[4.5rem]  -inset-x-6   md:inset-x-12 w-72 md:w-80 h-50 bg-gradient-to-r from-pink-100 to-purple-100 shadow-lg border rounded-md' : 'hidden'}`} onClick = { (e) => closeModal(e)}>
-                        <div className = 'absolute -top-2 left-28 md:left-40 z-10 w-4 h-4  rotate-45 bg-gradient-to-r from-pink-100 to-purple-100'></div>
+                    <div className = {`${(inputFocus || inputRef) ? 'absolute top-[4.5rem]  -inset-x-12   md:inset-x-12 w-72 md:w-80 h-50 bg-gradient-to-r from-pink-100 to-purple-100 shadow-lg border rounded-md' : 'hidden'}`} onClick = { (e) => closeModal(e)}>
+                        <div className = 'absolute -top-2 left-32 md:left-40 z-10 w-4 h-4  rotate-45 bg-pink-100'></div>
                         <div className = 'flex flex-col py-4 h-96  scrollbar-thin'>
                            {
                                loadingInput ? (
@@ -264,7 +264,7 @@ const Header = ({dataValue,icon, name }) => {
                     )}
 
                     <div className = {`${menuModal ? 'absolute top-12 -left-60 w-72 bg-white rounded-md shadow-lg' : 'hidden'}`}>
-                        <div className = 'absolute -top-2 right-6 w-4 h-4 rotate-45 bg-white'></div>
+                        <div className = 'inline-flex md:hidden absolute -top-2 right-6 w-4 h-4 rotate-45 bg-white'></div>
                         <div className = 'flex flex-col justify-center md:hidden'>
                             {data.map((icon,index) => (
                                 <div className = 'flex items-center gap-4 p-4 transition duration-700 ease-out hover:bg-gray-100 cursor-pointer' onClick = {() => setActiveTab(icon.name)} key = {index}>
@@ -309,11 +309,12 @@ const Header = ({dataValue,icon, name }) => {
                     ) : (
                         <div className = 'relative w-8 h-8' onClick = {changeUser}>
                            <LazyLoadImage  src = 'https://i.ibb.co/ysJmcnf/placeholder-removebg-preview.png' alt = 'PlaceholderUser' />
+                           
                         </div>
                     )}
 
                     <div className = {`${headerContainer ? 'absolute z-50 top-14 -left-48 md:left-5  rounded-md w-72 h-auto shadow-2xl bg-gradient-to-r from-pink-100 to-white border' : 'hidden'}`}>
-                        <div className = 'absolute -top-2 right-6 w-4 h-4 rotate-45 bg-gradient-to-r from-pink-50 to-white'></div>
+                        <div className = 'absolute -top-2 right-5 w-4 h-4 rotate-45 bg-gradient-to-r from-pink-50 to-white'></div>
                         <Fade>
                             <div className = 'flex flex-col'>
                                 <div className="flex items-center p-3 cursor-pointer hover:bg-gray-50" onClick = { () => router.push(`/component/profile/${user?.uid || userFacebook?.uid}`)}>
@@ -352,7 +353,7 @@ const Header = ({dataValue,icon, name }) => {
 
                 <div onClick = {closeModalHeader} className = {`${reelsModal ? 'fixed inset-0 w-full h-full flex items-center justify-center bg-black bg-opacity-80 transition duration-1000 ease-out' : 'hidden'}`}>
                     <Fade>
-                        <div  className = 'reelsContainer bg-white w-[26rem] h-2/3 md:w-[30rem] md:h-2/3 overflow-scroll scroll-snap-y rounded-md shadow-lg'>
+                        <div  className = 'reelsContainer bg-white w-[26rem] h-2/3 md:w-[30rem] md:h-2/3 overflow-scroll scroll-snap-y rounded-md shadow-lg mx-4'>
                             {
                                 reelsData.map((reelData, index) => (
                                     <Reels setReelsModal = {setReelsModal} key = {index} id = {reelData.id} video = {reelData.data().video} avatar = {reelData.data().avatar} comments = {reelData.data().comments} likes = {reelData.data().likes} song = {reelData.data().song} name = {reelData.data().name} description = {reelData.data().description}   />

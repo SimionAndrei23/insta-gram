@@ -79,7 +79,7 @@ const Reels = ( {setReelsModal,id,avatar,comments, likes,video,name,description,
    }
     
     return (
-        <div className = 'relative w-full h-full snap-start'>
+        <div className = 'relative w-full h-full snap-start '>
            <video ref = {reelsRef} onClick = {videoReels} className = 'w-full h-full object-fill' loop src = {video} />
            <div className = 'absolute top-0 left-0 w-full flex items-center justify-between gap-6 p-4'>
                <ArrowLeftIcon onClick = {() => setReelsModal(false)} className = 'iconsReels' />

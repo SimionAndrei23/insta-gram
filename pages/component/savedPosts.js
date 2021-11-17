@@ -22,10 +22,10 @@ const savedPosts = () => {
    },[])
 
     return (
-        <div className = 'min-h-screen  overflow-y-auto'>
+        <div className = 'min-h-screen'>
             <Header />
-            <div className = 'mt-10'>
-               <div className = 'flex flex-col max-w-6xl w-full h-full mx-auto'>
+            <div className = 'relative mt-10'>
+               <div className = 'flex flex-col max-w-6xl w-full h-full mx-auto px-5'>
                   <div onClick = { () => router.push('/')} className = 'flex items-center cursor-pointer'>
                        <ChevronLeftIcon className = 'h-8 w-8 cursor-pointer text-gray-300' />
                        <span className = 'text-gray-500'> Saved </span>
@@ -33,7 +33,7 @@ const savedPosts = () => {
                   <div className = 'flex items-center cursor-pointer'>
                       <span className = 'font-semibold pl-3 py-2'>All Posts</span>
                   </div>
-                  <div className = 'flex flex-wrap gap-4 md:gap-6 pl-3 mt-5 pb-10'>
+                  <div className = 'flex items-center justify-center flex-wrap gap-4 md:gap-6 pl-3 mt-5 pb-10'>
                     {posts?.map((post, index) => (
                         <PostSaved key = {index} id = {post.id}  />
                     ))}

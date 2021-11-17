@@ -13,6 +13,7 @@ export default function Home() {
 
   const [width, setWidth]   = useState(null);
   const [height, setHeight] = useState(null);
+  console.log(height)
   const parentRef = useRef(null)
   const [loadingConfetti, setLoadingConfetti] = useState(false)
 
@@ -28,7 +29,7 @@ export default function Home() {
       document.body.style.overflowX = 'hidden'
       const confettiLoading = setInterval(() => {
         setLoadingConfetti(false)
-      }, 8000)
+      }, 10000)
       return () => {
         clearInterval(confettiLoading)
       }
@@ -65,7 +66,7 @@ export default function Home() {
 
             {
               loadingConfetti ? ( 
-                <Confetti className = 'z-50' width = {width} height = {height}  />
+                <Confetti numberOfPieces = {400}  width = {width} height = {height}  />
               ) : (
                 ''
               )
@@ -91,7 +92,6 @@ export default function Home() {
             )}
 
           </div>
-        
     </div>
   )
 }

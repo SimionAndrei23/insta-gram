@@ -244,7 +244,6 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
         }
     }
 
-
     return (
         <div className = 'flex flex-col bg-white overflow-hidden  my-8 shadow-2xl '>
 
@@ -398,14 +397,18 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
             {/* input below */}
 
            <div className = 'relative border-t mt-2'>
-                <form onSubmit = {sendComment} className = 'relative flex items-center p-4'>
-                    <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-gray-500' />
+                <form onSubmit = {sendComment} className = 'flex items-center p-4'>
+                    {emojiSelected ? (
+                        <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-yellow-300' />
+                    ) : (
+                        <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-gray-500' />
+                    )}
                     <input  className = 'bg-transparent border-none flex-1 focus:ring-0 outline-none' placeholder = 'Add a comment...' type="text" value = {input} onChange = {(e) => setInput(e.target.value)} />
                     <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
                 </form>
                 {
                emojiSelected ? (
-                <Picker onSelect = {emojiSelect} style={{ position: 'absolute', bottom: '72px', left: '0' }} /> 
+                <Picker onSelect = {emojiSelect} theme = 'dark' style={{ position: 'absolute', bottom: '4.5rem', left: '0' }} /> 
                ) : (
                    <div className = 'hidden'></div>
                )
@@ -413,9 +416,9 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
            </div>
 
            {openModalComment ? (
-               <div className = 'fixed inset-0 z-50 p-10  bg-black bg-opacity-50 flex items-center justify-center overflow-hidden transition duration-1000 ease-in-out' onClick = {closeModal}>
+               <div className = 'fixed inset-0 z-50 p-10  bg-black bg-opacity-80 flex items-center justify-center overflow-hidden transition duration-1000 ease-in-out' onClick = {closeModal}>
                    <Fade>
-                       <div className = 'flex flex-wrap md:flex-nowrap md:w-3/4 md:h-3/4 w-full h-full'>
+                       <div className = 'relative flex flex-wrap md:flex-nowrap md:w-3/4 md:h-3/4 w-full h-full'>
                        <div className = ' h-1/2 w-full md:w-3/4 md:h-full overflow-hidden cursor-pointer'>
                             <div className = 'relative h-full w-full overflow-hidden'>
                                 <img className = 'absolute top-0 left-0 w-full h-full object-cover' src = {img} alt = 'userPost' />
@@ -462,9 +465,9 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
                                     ))}
                                 </div>
                            </div>
-                           <div className = 'hidden md:flex flex-col border-b-2'>
-                               <div className = 'px-4 py-3 pb-2 flex  flex-col space-y-2'>
-                                   <div className = 'flex justify-between items-center'>
+                           <div className = 'hidden md:flex relative flex-col border-b-2'>
+                               <div className = 'relative py-3 pb-2 flex  flex-col space-y-2'>
+                                   <div className = 'flex justify-between items-center px-4'>
                                         <div className = 'flex items-center space-x-4'>
                                             {
                                                 hasLiked ? (
@@ -483,27 +486,54 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
                                             ) : (
                                                 <BookmarkIcon onClick = {savePost} className = 'buttonIcon' />
                                             )
-                                        }
-                                    
+                                        } 
                                    </div>
-                                   <span className = 'font-bold'> 
-                                   {!!likes.length && (
-                                        <>
-                                            {likes.length < 2 ? likes.length + ' like ' : ''}
-                                            {' '}
-                                            {likes.length >= 2 ? likes.length + ' likes ' : ''}
-                                        </>
-                                    )}
-                                    </span>
-                                    <span className = 'text-sm text-gray-400'> <Moment fromNow date = {timestampPost} /></span>
+                                   <div className = 'flex flex-col gap-2 px-4'>
+                                        <span className = 'font-bold'> 
+                                            {!!likes.length && (
+                                                <>
+                                                    {likes.length < 2 ? likes.length + ' like ' : ''}
+                                                    {' '}
+                                                    {likes.length >= 2 ? likes.length + ' likes ' : ''}
+                                                </>
+                                            )}
+                                        </span>
+                                        <span className = 'text-sm text-gray-400'> <Moment fromNow date = {timestampPost} /></span>
+                                   </div>
+                                    <form onSubmit={sendComment} className = 'flex items-center md:py-2 px-4 py-2 border-t-2'>
+                                        {emojiSelected ? (
+                                            <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-yellow-300' />
+                                        ) : (
+                                            <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-gray-500' />
+                                        )}
+                                            <input value = {input} onChange = { (e) => setInput(e.target.value)} className = 'flex-1 apperance-none bg-transparent border-none focus:ring-transparent' type = 'text' placeholder = 'Type in here...' />
+                                            <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
+                                    </form>
+                                    {emojiSelected ? (
+                                        <Picker onSelect = {emojiSelect} style={{ position: 'absolute', bottom: '4rem', left: '0' }} /> 
+                                    ) : (
+                                        <div className = 'hidden'></div>
+                                    )
+                                    }
                                </div>
                            </div>
-
-                           <form onSubmit={sendComment} className = 'flex items-center px-4 md:py-4 py-1'>
-                                <EmojiHappyIcon className = 'hidden md:inline-flex w-6 text-gray-500 cursor-pointer' />
-                                <input value = {input} onChange = { (e) => setInput(e.target.value)} className = 'flex-1 apperance-none bg-transparent border-none focus:ring-transparent' type = 'text' placeholder = 'Type in here...' />
-                                <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
-                            </form>
+                           <div className = 'flex flex-col md:hidden'>
+                                <form onSubmit={sendComment} className = 'flex items-center md:py-2 px-4 py-2 border-t-2'>
+                                    {emojiSelected ? (
+                                        <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-yellow-300' />
+                                    ) : (
+                                        <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-gray-500' />
+                                    )}
+                                        <input value = {input} onChange = { (e) => setInput(e.target.value)} className = 'flex-1 apperance-none bg-transparent border-none focus:ring-transparent' type = 'text' placeholder = 'Type in here...' />
+                                        <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
+                                </form>
+                                {emojiSelected ? (
+                                        <Picker onSelect = {emojiSelect} theme = 'dark' style={{ position: 'absolute', bottom: '3.5rem', left: '0' }} /> 
+                                    ) : (
+                                        <div className = 'hidden'></div>
+                                    )
+                                }
+                           </div>
                        </div>
                    </div>
                    </Fade>

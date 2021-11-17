@@ -24,11 +24,11 @@ const userData = () => {
             <Header name = {name} />
             <div className = 'max-w-3xl mt-10 md:max-w-4xl md:mx-auto px-4 '>
             <div className = 'flex flex-col gap-8 md:gap-20'>
-                <div className = 'flex items-start gap-10 md:gap-20'>
-                    <div className = 'relative w-28 h-28 md:w-40 md:h-40'>
+                <div className = 'flex items-start justify-between md:justify-start gap-2 md:gap-20'>
+                    <div className = 'relative w-20 h-20 md:w-40 md:h-40'>
                         <LazyLoadImage src = {avatar} className = 'absolute top-0 left-0 w-full h-full rounded-full p-2 border cursor-pointer object-cover' />
                     </div>
-                    <div className = 'flex flex-col justify-center gap-8'>
+                    <div className = 'flex flex-col justify-center items-center md:items-start gap-8'>
                         <div className = 'flex items-center gap-2 md:gap-4'>
                             <div className = 'flex items-center gap-2 mr-5'>
                                 <span className = ' text-2xl  text-black text-opacity-70'> {name} </span>
@@ -53,7 +53,7 @@ const userData = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className = 'flex md:hidden items-center gap-4'>
+                        <div className = 'flex md:hidden items-center justify-center gap-4'>
                                 <div className = 'py-1 px-2 border rounded-sm cursor-pointer'>
                                     <span className = 'text-sm font-semibold text-center flex-1 px-8'> Message </span>
                                 </div>
@@ -66,19 +66,19 @@ const userData = () => {
                                 </div>
                             </div>
                         <div className = 'hidden md:flex items-center justify-between pr-12'>
-                            <div className = 'flex items-center gap-2'>
+                            <div className = 'flex items-center gap-2 mx-2'>
                                     <span className = 'font-semibold text-md'>
                                         <NumberFormat value = {valuePosts} displayType = {'text'} thousandSeparator = {true}></NumberFormat>
                                     </span>
                                 <span className = 'text-sm'> posts </span>
                             </div>
-                            <div className = 'flex items-center gap-2'>
+                            <div className = 'flex items-center gap-2 mx-2'>
                                 <span className = 'font-semibold text-md'>
                                     <NumberFormat value = {valueFollowers} displayType = {'text'} thousandSeparator = {true}></NumberFormat> 
                                 </span>
                                 <span className = 'text-sm'> followers </span>
                             </div>
-                            <div className = 'flex items-center gap-2'>
+                            <div className = 'flex items-center gap-2 mx-2'>
                                 <span className = 'font-semibold text-md'>
                                     <NumberFormat value = {valueFollowing} displayType = {'text'} thousandSeparator = {true} />
                                 </span>
