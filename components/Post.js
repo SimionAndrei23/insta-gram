@@ -309,18 +309,16 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
                 )}
             </div>
 
-            <div className = 'containerImage relative flex items-center overflow-hidden transition-all'>
-                <div className = 'relative  w-full  h-[20rem] md:h-[35rem] cursor-pointer'>
-                    {
-                        img ? (
-                            <LazyLoadImage src = {img}  className = 'absolute top-0 left-0 w-full h-full object-cover max-w-full ' />
-                        ) : (
-                            <div className = 'flex items-center justify-center h-full'>
-                                <img className = 'w-12 h-12 md:w-32 md:h-32' src = 'https://i.ibb.co/f98Txpm/Flowing-gradient.gif"' />
-                            </div>
-                        )
-                    }
-                </div>
+            <div className = 'relative containerImage flex items-center justify-center overflow-hidden transition-all'>
+            {
+                img ? (
+                    <LazyLoadImage src = {img}  className = 'block max-h-full max-w-full mx-auto align-middle ' />
+                ) : (
+                    <div className = 'flex items-center justify-center h-full'>
+                        <img className = 'w-12 h-12 md:w-32 md:h-32' src = 'https://i.ibb.co/f98Txpm/Flowing-gradient.gif"' />
+                    </div>
+                )
+            }
                 <div className = {`${savedPost ? 'absolute bottom-0 w-full h-14 bg-white p-4 border-b-2 border-opacity-40' : 'hidden'}`}>
                     <div className = 'flex items-center justify-between'>
                         <span className = 'text-black font-semibold'> Your item has been saved </span>
@@ -416,21 +414,19 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
            </div>
 
            {openModalComment ? (
-               <div className = 'fixed inset-0 z-50 p-10  bg-black bg-opacity-80 flex items-center justify-center overflow-hidden transition duration-1000 ease-in-out' onClick = {closeModal}>
+               <div className = 'fixed inset-0 z-50 p-6  bg-black bg-opacity-80 flex items-center justify-center overflow-hidden transition duration-1000 ease-in-out' onClick = {closeModal}>
                    <Fade>
-                       <div className = 'relative flex flex-wrap md:flex-nowrap md:w-3/4 md:h-3/4 w-full h-full'>
-                       <div className = ' h-1/2 w-full md:w-3/4 md:h-full overflow-hidden cursor-pointer'>
-                            <div className = 'relative h-full w-full overflow-hidden'>
-                                <img className = 'absolute top-0 left-0 w-full h-full object-cover' src = {img} alt = 'userPost' />
-                                <div className = {`${savedPost ? 'absolute bottom-0 w-full h-14 bg-white p-4 border-b-2 border-opacity-40' : 'hidden'}`}>
-                                    <div className = 'flex items-center justify-between'>
-                                        <span className = 'text-black font-semibold'> Your item has been saved </span>
-                                        <span onClick = {routeSavedPosts} className = 'text-blue-500 font-semibold hover:text-blue-700 cursor-pointer'>View your saved posts</span>
-                                    </div>
+                       <div className = 'relative flex flex-wrap w-4/5 h-4/5 md:flex-nowrap overflow-hidden'>
+                       <div className = 'relative w-full h-full cursor-pointer'>
+                            <img className = 'block max-h-full max-w-full mx-auto align-middle' src = {img} alt = 'userPost' />
+                            <div className = {`${savedPost ? 'absolute bottom-0 w-full h-14 bg-white p-4 border-b-2 border-opacity-40' : 'hidden'}`}>
+                                <div className = 'flex items-center justify-between'>
+                                    <span className = 'text-black font-semibold'> Your item has been saved </span>
+                                    <span onClick = {routeSavedPosts} className = 'text-blue-500 font-semibold hover:text-blue-700 cursor-pointer'>View your saved posts</span>
                                 </div>
                             </div>
                        </div>
-                       <div className = 'flex w-full h-1/2 md:w-2/4 md:h-full flex-col bg-gradient-to-tr from-bg-pink-50 to-bg-red-50 overflow-hidden'>
+                       <div className = 'flex flex-col w-full h-full bg-gradient-to-tr from-bg-pink-50 to-bg-red-50 overflow-hidden'>
                            <div className = 'flex items-center border-b-2 pb-3 p-4 cursor-pointer'>
                                 <img className = 'h-10 w-10 rounded-full cursor-pointer mr-3' src = {user?.photo || userFacebook?.photo} alt = 'userImage' />
                                 <BadgeCheckIcon className = 'w-4 h-4 text-blue-500' />
@@ -510,7 +506,7 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
                                             <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
                                     </form>
                                     {emojiSelected ? (
-                                        <Picker onSelect = {emojiSelect} style={{ position: 'absolute', bottom: '4rem', left: '0' }} /> 
+                                        <Picker onSelect = {emojiSelect} style={{ position: 'absolute', bottom: '4rem', left: '0', width: '250px !important' }} /> 
                                     ) : (
                                         <div className = 'hidden'></div>
                                     )

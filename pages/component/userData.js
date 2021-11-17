@@ -25,13 +25,13 @@ const userData = () => {
             <div className = 'max-w-3xl mt-10 md:max-w-4xl md:mx-auto px-4 '>
             <div className = 'flex flex-col gap-8 md:gap-20'>
                 <div className = 'flex items-start justify-between md:justify-start gap-2 md:gap-20'>
-                    <div className = 'relative w-20 h-20 md:w-40 md:h-40'>
+                    <div className = 'relative w-20 h-20 md:w-40 md:h-40 mr-8'>
                         <LazyLoadImage src = {avatar} className = 'absolute top-0 left-0 w-full h-full rounded-full p-2 border cursor-pointer object-cover' />
                     </div>
                     <div className = 'flex flex-col justify-center items-center md:items-start gap-8'>
                         <div className = 'flex items-center gap-2 md:gap-4'>
                             <div className = 'flex items-center gap-2 mr-5'>
-                                <span className = ' text-2xl  text-black text-opacity-70'> {name} </span>
+                                <span className = ' text-md md:text-2xl  text-black text-opacity-70'> {name} </span>
                                 <BadgeCheckIcon className = 'text-blue-500  w-6 h-6' />
                             </div>
                             <div className = 'flex md:hidden py-1 px-2 cursor-pointer'>
@@ -54,15 +54,12 @@ const userData = () => {
                             </div>
                         </div>
                         <div className = 'flex md:hidden items-center justify-center gap-4'>
-                                <div className = 'py-1 px-2 border rounded-sm cursor-pointer'>
+                                <div className = 'py-1 md:px-2 border rounded-sm cursor-pointer'>
                                     <span className = 'text-sm font-semibold text-center flex-1 px-8'> Message </span>
                                 </div>
                                 <div className = 'flex items-center justify-center border rounded-sm py-1 px-5 cursor-pointer'>
                                     <UserIcon className = 'h-6 w-6' />
                                     <CheckIcon className = 'h-5 w-5 text-black text-opacity-40' />
-                                </div>
-                                <div className = 'py-2 px-2 border rounded-sm cursor-pointer'>
-                                    <ChevronDownIcon className = 'w-4 h-4 text-black text-opacity-40' />
                                 </div>
                             </div>
                         <div className = 'hidden md:flex items-center justify-between pr-12'>

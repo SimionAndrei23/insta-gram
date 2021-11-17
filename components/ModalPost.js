@@ -38,16 +38,6 @@ const ModalPost = ( {loadingConfetti,setLoadingConfetti}) => {
         }
 
     }
-
-    useEffect(() =>{
-        if(modalOne) {
-            document.body.style.overflow = 'hidden'
-        }
-        else {
-            document.body.style.overflow = 'auto'
-        }
-    },[modalOne])
-
     const closeModal = (e) => {
 
         if(e.target.classList.contains('fixed')) {
@@ -101,15 +91,15 @@ const ModalPost = ( {loadingConfetti,setLoadingConfetti}) => {
     }
 
     return (
-        <div onClick = {closeModal} className = 'fixed inset-0 flex items-center justify-center z-50 overflow-hidden bg-black bg-opacity-80'>
+        <div onClick = {closeModal} className = 'fixed inset-0 flex items-center justify-center py-10 z-50 overflow-hidden bg-black bg-opacity-80'>
             <Zoom>
                 <div className = {`${selectedFile ? 'relative bg-white pb-2 w-96 h-auto shadow-xl rounded-xl': 'relative bg-white py-4 w-96 h-80 shadow-xl rounded-xl'}`}>
                     <div className = 'absolute top-0 left-0 h-full w-full clipPath1'></div>
                     <div className = 'absolute top-0 left-0 h-full w-full clipPath2'></div>
                     <form className = 'flex flex-col items-center '>
                         {selectedFile ?  (
-                            <div  className = 'relative w-full h-44 overflow-hidden'>
-                                <img className = 'absolute w-full h-full object-cover cursor-pointer' src = {selectedFile}  alt = 'SelectImage' />
+                            <div onClick = {() => setSelectedFile(null)}  className = 'relative w-full h-full overflow-hidden'>
+                                <img className = 'block max-w-full max-h-full cursor-pointer' src = {selectedFile}  alt = 'SelectImage' />
                             </div>
                         ) : (
                                 <div className = 'mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-red-100 cursor-pointer' onClick = { () => filePickerRef.current.click()}>

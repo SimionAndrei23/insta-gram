@@ -91,5 +91,19 @@ html {
   background-size: 20px;
 }
 
+.emoji-mart 
+{
+  width: 20.5rem !important;
+}
 
+.containerImage {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
 
+@media (max-width: 767px) {
+  .inputRef::placeholder {
+    font-size: 12px;
+  }
+}

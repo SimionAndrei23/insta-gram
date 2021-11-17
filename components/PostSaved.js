@@ -6,7 +6,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { Context } from "../Context";
 
-const PostSaved = ( {id} ) => {
+const PostSaved = ( {noTilt,id} ) => {
 
     const { user, userFacebook } = useContext(Context)
 
@@ -27,11 +27,19 @@ const PostSaved = ( {id} ) => {
             {savedPosts.map((savedPost, index) => (
                    <div>
                        <div className = 'hidden md:flex'>
-                        <Tilt options = {{ max: 20, transition: true, speed: 500, easing:"cubic-bezier(.03,.98,.52,.99)"}}>
-                            <div className = 'relative  md:w-72 md:h-80 cursor-pointer'>
-                                <LazyLoadImage effect = 'opacity'   src = {savedPost.data().postImage} atl = '' className = 'absolute top-0 left-0 w-full z-10 h-full object-cover rounded-sm shadow-xl' />
-                            </div>
-                        </Tilt>
+                        {
+                            noTilt ? (                            
+                                <div className = 'relative  md:w-72 md:h-80 cursor-pointer'>
+                                    <LazyLoadImage effect = 'opacity'   src = {savedPost.data().postImage} atl = '' className = 'absolute top-0 left-0 w-full z-10 h-full object-cover rounded-sm shadow-xl' />
+                                </div>
+                            ) : (
+                                <Tilt options = {{ max: 20, transition: true, speed: 500, easing:"cubic-bezier(.03,.98,.52,.99)"}}>
+                                    <div className = 'relative  md:w-72 md:h-80 cursor-pointer'>
+                                        <LazyLoadImage effect = 'opacity'   src = {savedPost.data().postImage} atl = '' className = 'absolute top-0 left-0 w-full z-10 h-full object-cover rounded-sm shadow-xl' />
+                                    </div>
+                                </Tilt>
+                            )
+                        }
                     </div>
 
                        <div className = 'flex md:hidden'>

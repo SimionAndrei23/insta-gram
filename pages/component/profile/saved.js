@@ -24,7 +24,7 @@ const saved = () => {
             <div className = 'flex flex-col max-w-4xl mx-auto w-full h-full'>
                 <div className = 'flex flex-wrap items-center justify-center gap-2 px-10 md:px-0  md:gap-3 pb-10'>
                     {totalPosts?.map((post, index) => (
-                        <PostSaved key = {index} id = {post.id}  />
+                        <PostSaved noTilt key = {index} id = {post.id}  />
                     ))}     
                 </div>
             </div>

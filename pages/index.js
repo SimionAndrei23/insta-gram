@@ -29,7 +29,7 @@ export default function Home() {
       document.body.style.overflowX = 'hidden'
       const confettiLoading = setInterval(() => {
         setLoadingConfetti(false)
-      }, 10000)
+      }, 8000)
       return () => {
         clearInterval(confettiLoading)
       }
@@ -66,7 +66,7 @@ export default function Home() {
 
             {
               loadingConfetti ? ( 
-                <Confetti numberOfPieces = {400}  width = {width} height = {height}  />
+                <Confetti style = {{zIndex: 100}} numberOfPieces = {400}  width = {width} height = {height}  />
               ) : (
                 ''
               )

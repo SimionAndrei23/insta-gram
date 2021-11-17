@@ -163,15 +163,15 @@ const Header = ({dataValue,icon, name }) => {
                <div className = 'relative  ml-5 flex-1 md:w-2/5 md:flex-none'>
                     <div className = 'relative mt-1 p-3 rounded-md '>
                         <div className = 'absolute top-5 left-6 flex items-center pointer-events-none'>
-                            <SearchIcon className = 'h-6 w-5  text-gray-500' />
+                            <SearchIcon className = 'h-7 w-4 md:h-7 md:w-5  text-gray-500' />
                         </div>
-                        <input  value = {inputRef} onChange = { (e) => setInputRef(e.target.value)} onFocus = { () => setInputFocus(!inputFocus)}  type="text" placeholder = {`${ name ? name : 'Search'}`} className = 'bg-gray-50 border-gray-300 block w-full pl-10 rounded-md focus:ring-transparent focus:border-black sm:text-sm' />
+                        <input  value = {inputRef} onChange = { (e) => setInputRef(e.target.value)} onFocus = { () => setInputFocus(!inputFocus)}  type="text" placeholder = {`${ name ? name : 'Search'}`} className = 'inputRef bg-gray-50 border-gray-300 block w-full pl-10 rounded-md focus:ring-transparent focus:border-black sm:text-sm' />
                         { inputRef ? <XIcon className = 'absolute top-6 right-8 text-gray-400  h-4 w-4 ml-3 cursor-pointer' onClick = { () => setInputRef('')} /> : null}
                         { inputFocus ? <XIcon className = 'absolute top-6 right-8 text-gray-400  h-4 w-4 ml-3 cursor-pointer' /> : null}
                     </div>
                     
                     <div className = {`${(inputFocus || inputRef) ? 'absolute top-[4.5rem]  -inset-x-12   md:inset-x-12 w-72 md:w-80 h-50 bg-gradient-to-r from-pink-100 to-purple-100 shadow-lg border rounded-md' : 'hidden'}`} onClick = { (e) => closeModal(e)}>
-                        <div className = 'absolute -top-2 left-32 md:left-40 z-10 w-4 h-4  rotate-45 bg-pink-100'></div>
+                        <div className = 'absolute -top-2 left-32 md:left-40 z-10 w-4 h-4  rotate-45 bg-gradient-to-r from-pink-100 to-purple-100'></div>
                         <div className = 'flex flex-col py-4 h-96  scrollbar-thin'>
                            {
                                loadingInput ? (
