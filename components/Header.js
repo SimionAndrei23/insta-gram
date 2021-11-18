@@ -1,4 +1,4 @@
-import React, {useContext, useEffect,useState} from 'react'
+import React, {useContext,useEffect,useState, useRef} from 'react'
 import {SearchIcon,BookmarkIcon, PlusCircleIcon, CogIcon, SwitchHorizontalIcon, XIcon, UserCircleIcon, UseGroupIcon, HeartIcon, PaperAirplaneIcon, MenuIcon, UserGroupIcon, ChevronRightIcon, RefreshIcon, HomeIcon, VideoCameraIcon, CameraIcon} from '@heroicons/react/outline'
 import {HeartIcon as HeartIconSolid} from '@heroicons/react/solid'
 import {VideoCameraIcon as VideoCameraIconSolid} from '@heroicons/react/solid'
@@ -15,6 +15,12 @@ import { Context } from '../Context'
 const Header = ({dataValue,icon, name }) => {
     
     const { user, signOutUser, modalOne, setModalOne, userFacebook } = useContext(Context)
+
+    const refUserImage = useRef()
+
+    const refHeart = useRef()
+
+    const refMenuModal = useRef()
 
     const router = useRouter()
 
@@ -39,11 +45,11 @@ const Header = ({dataValue,icon, name }) => {
         }
     }, [reelsModal])*/
     
-    
-
     const [menuModal, setMenuModal] = useState(false)
 
     const [modalHeart, setModalHeart] = useState(false)
+
+    console.log(modalHeart)
 
     const [loadingHeart, setLoadingHeart] = useState(false)
 
@@ -74,13 +80,6 @@ const Header = ({dataValue,icon, name }) => {
     const [activeTab, setActiveTab] = useState(icon);
 
     const [borderUser, setBorderUser] = useState(false);
-
-    const changeUser = () => {
-
-        setHeaderContainer(!headerContainer);
-
-        setBorderUser(!borderUser)
-    }
 
     useEffect(() => {
         const suggestions = [...Array(20)].map((_, i) => ({
@@ -142,6 +141,36 @@ const Header = ({dataValue,icon, name }) => {
 
     }
 
+    useEffect(() => {
+        const checkIfClickedOutside = (e) => {
+          if (headerContainer && refUserImage.current && !refUserImage.current.contains(e.target)) {
+            setHeaderContainer(!headerContainer)
+          }
+
+          else if(modalHeart && refHeart.current && !refHeart.current.contains(e.target)) {
+              setModalHeart(!modalHeart)
+          }
+          else if(menuModal && refMenuModal.current && !refMenuModal.current.contains(e.target)) {
+              setMenuModal(!menuModal)
+          }
+        }
+    
+        document.addEventListener("mouseup", checkIfClickedOutside)
+    
+        return () => {
+          // Cleanup the event listener
+          document.removeEventListener("mouseup", checkIfClickedOutside)
+        }
+      }, [headerContainer, modalHeart, menuModal]
+    )
+
+    const changeUser = () => {
+
+        setHeaderContainer(!headerContainer)
+
+        setBorderUser(!borderUser)
+    }
+
 
     return (
         <div className = 'sticky w-full inset-0 h-18 z-40 shadow-xl border-b py-1 headerColor'>
@@ -165,7 +194,7 @@ const Header = ({dataValue,icon, name }) => {
                         <div className = 'absolute top-5 left-6 flex items-center pointer-events-none'>
                             <SearchIcon className = 'h-7 w-4 md:h-7 md:w-5  text-gray-500' />
                         </div>
-                        <input  value = {inputRef} onChange = { (e) => setInputRef(e.target.value)} onFocus = { () => setInputFocus(!inputFocus)}  type="text" placeholder = {`${ name ? name : 'Search'}`} className = 'inputRef bg-gray-50 border-gray-300 block w-full pl-10 rounded-md focus:ring-transparent focus:border-black sm:text-sm' />
+                        <input value = {inputRef} onChange = { (e) => setInputRef(e.target.value)} onFocus = { () => setInputFocus(!inputFocus)}  type="text" placeholder = {`${ name ? name : 'Search'}`} className = 'inputRef bg-gray-50 border-gray-300 block w-full pl-10 rounded-md focus:ring-transparent focus:border-black sm:text-sm' />
                         { inputRef ? <XIcon className = 'absolute top-6 right-8 text-gray-400  h-4 w-4 ml-3 cursor-pointer' onClick = { () => setInputRef('')} /> : null}
                         { inputFocus ? <XIcon className = 'absolute top-6 right-8 text-gray-400  h-4 w-4 ml-3 cursor-pointer' /> : null}
                     </div>
@@ -248,7 +277,9 @@ const Header = ({dataValue,icon, name }) => {
                         ))}
                         {
                             modalHeart ? (
-                                <HeartIconSolid onClick = { () =>  setModalHeart(!modalHeart)} className = 'navButton' />
+                                <div ref = {refHeart}>
+                                    <HeartIconSolid onClick = { () =>  setModalHeart(!modalHeart)} className = 'navButton' />
+                                </div>
                             ) : (
                                 <HeartIcon onClick = { () =>  setModalHeart(!modalHeart)} className = 'navButton' />
                             )
@@ -258,9 +289,11 @@ const Header = ({dataValue,icon, name }) => {
                     </div>
 
                     { menuModal ? (
-                        <XIcon onClick = { () => setMenuModal(!menuModal)} className = 'h-7 inline-flex md:hidden cursor-pointer transform transition duration-1000 ease-out' />
+                        <div ref = {refMenuModal}>
+                            <XIcon onClick = { () => setMenuModal(!menuModal)} className = 'h-7 inline-flex md:hidden cursor-pointer transform transition duration-1000 ease-out' />
+                        </div>
                     ) : (
-                        <MenuIcon onClick = { () => setMenuModal(!menuModal)} className = 'h-7 inline-flex md:hidden cursor-pointer transform transition duration-1000 ease-out' />
+                        <MenuIcon  onClick = { () => setMenuModal(!menuModal)} className = 'h-7 inline-flex md:hidden cursor-pointer transform transition duration-1000 ease-out' />
                     )}
 
                     <div className = {`${menuModal ? 'absolute top-12 -left-60 w-72 bg-white rounded-md shadow-lg' : 'hidden'}`}>
@@ -276,9 +309,9 @@ const Header = ({dataValue,icon, name }) => {
                             <div  onClick = { () =>  setModalHeart(!modalHeart)}  className = 'flex items-center gap-4 p-4 transition duration-700 ease-out hover:bg-gray-100 cursor-pointer'>
                                 {
                                     modalHeart ? (
-                                        <HeartIconSolid  className = 'h-6 w-6' />
+                                        <HeartIconSolid  ref = {refHeart}   className = 'h-6 w-6' />
                                     ) : (
-                                        <HeartIcon className = 'h-6 w-6' />
+                                        <HeartIcon  ref = {refHeart} className = 'h-6 w-6' />
                                     )
                                 }
                                 <span> Likes </span>
@@ -303,7 +336,7 @@ const Header = ({dataValue,icon, name }) => {
                     </div>
 
                     { user || userFacebook ? (
-                        <div className = 'relative w-8 h-8' onClick = {changeUser}>                                                                                                                                                                                    
+                        <div ref = {refUserImage} className = 'relative w-8 h-8' onClick = {changeUser}>                                                                                                                                                                                    
                             <LazyLoadImage src = {user?.photo || userFacebook?.photo}  alt = 'profile pic' className = {`${borderUser ? 'rounded-full cursor-pointer border  p-[1px] object-cover' : 'rounded-full cursor-pointer border'}`} />
                         </div>
                     ) : (

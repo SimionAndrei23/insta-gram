@@ -35,13 +35,13 @@ const login = () => {
                                 <img src = 'https://i.ibb.co/ysJmcnf/placeholder-removebg-preview.png' />
                             </div>
                             <div>
-                                <button onClick = {signInUser}  className = 'flex-1 w-56 mt-4 py-2  flex items-center gap-6 justify-center  bg-red-400 rounded-full text-white cursor-pointer hover:scale-105 transition-all transform duration-500 ease-out' type = 'button'>
+                                <button onClick = {signInUser}  className = 'flex-1 w-56 mt-4 py-2  flex items-center justify-evenly  bg-red-400 rounded-full text-white cursor-pointer hover:scale-105 transition-all transform duration-500 ease-out' type = 'button'>
                                     Login with Google
                                     <img src = 'https://i.ibb.co/vdXDfFj/google-logo-removebg-preview.png' className = 'w-6 h-6 object-cover' alt = 'GoogleLogo' />
                                 </button>
                                 <FacebookProvider appId="611691100256572">
                                             <LoginButton
-                                            className = 'flex-1 w-56 mt-4 py-2  flex items-center justify-center  bg-blue-400 rounded-full text-white cursor-pointer hover:scale-105 transition-all transform duration-500 ease-out'
+                                            className = 'flex-1 w-56 mt-4 py-2 flex items-center justify-evenly   bg-blue-400 rounded-full text-white cursor-pointer hover:scale-105 transition-all transform duration-500 ease-out'
                                                 scope="email"
                                                 onCompleted={handleFacebook}
                                             >

@@ -1,5 +1,5 @@
 
-import { BookmarkIcon,ChatIcon,DotsHorizontalIcon,DotsVerticalIcon,EmojiHappyIcon,HeartIcon,PaperAirplaneIcon,BadgeCheckIcon,XIcon } from '@heroicons/react/outline'
+import { ChevronLeftIcon,BookmarkIcon,ChatIcon,DotsHorizontalIcon,DotsVerticalIcon,EmojiHappyIcon,HeartIcon,PaperAirplaneIcon,BadgeCheckIcon,XIcon } from '@heroicons/react/outline'
 import faker from 'faker'
 import {HeartIcon as HeartIconFilled} from '@heroicons/react/solid';
 import {BookmarkIcon as BookmarkIconFilled} from '@heroicons/react/solid';
@@ -19,6 +19,7 @@ import { Picker } from 'emoji-mart'
 import { Context } from '../Context';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 
 
@@ -78,7 +79,7 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
 
     },[])
 
-    /*useEffect(() => {
+    useEffect(() => {
 
         if(sendModal)
         {
@@ -91,7 +92,7 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
             document.body.style.overflow = 'auto'
         }
 
-    },[sendModal])*/
+    },[sendModal])
 
     useEffect(() => {
 
@@ -319,59 +320,61 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
                     </div>
                 )
             }
-                <div className = {`${savedPost ? 'absolute bottom-0 w-full h-14 bg-white p-4 border-b-2 border-opacity-40' : 'hidden'}`}>
+                <div className = {`${savedPost ? 'absolute bottom-0 w-full bg-white py-4 px-2 md:px-4 border-b-2 border-opacity-40' : 'hidden'}`}>
                     <div className = 'flex items-center justify-between'>
-                        <span className = 'text-black font-semibold'> Your item has been saved </span>
-                        <span onClick = {routeSavedPosts} className = 'text-blue-500 font-semibold hover:text-blue-700 cursor-pointer'>View your saved posts</span>
+                        <span className = 'text-black font-semibold text-sm  text-center'> Your item has been saved </span>
+                        <span onClick = {routeSavedPosts} className = 'text-blue-500 font-semibold hover:text-blue-700 cursor-pointer text-sm text-center'>View your saved posts</span>
                     </div>
                 </div>
             </div>
 
-            <div className = 'flex justify-between items-center px-4 py-3'>
-                <div className = 'flex items-center space-x-4'>
+            <div className = 'relative flex flex-col gap-4'>
+                <div className = 'flex justify-between items-center px-4 py-3'>
+                    <div className = 'flex items-center space-x-4'>
+                        {
+                            hasLiked ? (
+                                <HeartIconFilled onClick = {likePost} className = 'buttonIcon' />
+                            ) : (
+                                <HeartIcon onClick = {likePost} className = 'buttonIcon' />
+                            )
+                        }
+                        <ChatIcon onClick = { () => setOpenModalComment(!openModalComment)} className = 'buttonIcon' />
+                        <PaperAirplaneIcon onClick = { () => setSendModal(!sendModal)} className = 'buttonIcon rotate-45' />
+                    </div>
+
                     {
-                        hasLiked ? (
-                            <HeartIconFilled onClick = {likePost} className = 'buttonIcon' />
+                        hasSavedPost ? (
+                            <BookmarkIconFilled onClick = {savePost} className = 'buttonIcon' />
                         ) : (
-                            <HeartIcon onClick = {likePost} className = 'buttonIcon' />
+                            <BookmarkIcon onClick = {savePost} className = 'buttonIcon' />
                         )
                     }
-                    <ChatIcon onClick = { () => setOpenModalComment(!openModalComment)} className = 'buttonIcon' />
-                    <PaperAirplaneIcon onClick = { () => setSendModal(!sendModal)} className = 'buttonIcon rotate-45' />
+                
                 </div>
 
-                {
-                    hasSavedPost ? (
-                        <BookmarkIconFilled onClick = {savePost} className = 'buttonIcon' />
+                <div className = 'absolute top-12 px-4'>
+                    {!!likes.length && (
+                        <span className = 'font-bold text-sm'>
+                            {likes.length < 2 ? likes.length + ' like ' : ''}
+                            {' '}
+                            {likes.length >= 2 ? likes.length + ' likes ' : ''}
+                        </span>
+                    )}
+                </div>
+
+                <div className = 'flex px-4 py-2'>
+                    <span className = 'font-bold mr-1'> {username || usernameFacebook} </span>
+                    {truncate ? (
+                        caption
                     ) : (
-                        <BookmarkIcon onClick = {savePost} className = 'buttonIcon' />
-                    )
-                }
-                
+                        caption.length > 200 ? (
+                            <Truncate lines={1} ellipsis={<span className = 'cursor-pointer text-gray-500' onClick = { () => setTruncate(!truncate)}>...more</span>}>
+                                {caption}
+                            </Truncate>
+                        ) : ( caption ) 
+                    )}
+                </div>
             </div>
-
-            <span className = 'px-4 font-bold text-sm'>
-                {!!likes.length && (
-                    <span>
-                        {likes.length < 2 ? likes.length + ' like ' : ''}
-                        {' '}
-                        {likes.length >= 2 ? likes.length + ' likes ' : ''}
-                    </span>
-                )}
-            </span>
-
-            <p className = 'px-4 py-2'>
-                <span className = 'font-bold mr-1'> {username || usernameFacebook} </span>
-                {truncate ? (
-                    caption
-                ) : (
-                    caption.length > 200 ? (
-                        <Truncate lines={1} ellipsis={<span className = 'cursor-pointer text-gray-500' onClick = { () => setTruncate(!truncate)}>...more</span>}>
-                            {caption}
-                        </Truncate>
-                    ) : ( caption ) 
-                )}
-            </p>
 
            <div onClick = { () => setOpenModalComment(true) }>
                {!!comments.length && (
@@ -405,139 +408,124 @@ function Post( {id, nameUser, userImg, img, caption,timestampPost}) {
                     <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
                 </form>
                 {
-               emojiSelected ? (
-                <Picker onSelect = {emojiSelect} theme = 'dark' style={{ position: 'absolute', bottom: '4.5rem', left: '0' }} /> 
-               ) : (
-                   <div className = 'hidden'></div>
-               )
-           }
-           </div>
-
-           {openModalComment ? (
-               <div className = 'fixed inset-0 z-50 p-6  bg-black bg-opacity-80 flex items-center justify-center overflow-hidden transition duration-1000 ease-in-out' onClick = {closeModal}>
-                   <Fade>
-                       <div className = 'relative flex flex-wrap w-4/5 h-4/5 md:flex-nowrap overflow-hidden'>
-                       <div className = 'relative w-full h-full cursor-pointer'>
-                            <img className = 'block max-h-full max-w-full mx-auto align-middle' src = {img} alt = 'userPost' />
-                            <div className = {`${savedPost ? 'absolute bottom-0 w-full h-14 bg-white p-4 border-b-2 border-opacity-40' : 'hidden'}`}>
-                                <div className = 'flex items-center justify-between'>
-                                    <span className = 'text-black font-semibold'> Your item has been saved </span>
-                                    <span onClick = {routeSavedPosts} className = 'text-blue-500 font-semibold hover:text-blue-700 cursor-pointer'>View your saved posts</span>
-                                </div>
-                            </div>
-                       </div>
-                       <div className = 'flex flex-col w-full h-full bg-gradient-to-tr from-bg-pink-50 to-bg-red-50 overflow-hidden'>
-                           <div className = 'flex items-center border-b-2 pb-3 p-4 cursor-pointer'>
-                                <img className = 'h-10 w-10 rounded-full cursor-pointer mr-3' src = {user?.photo || userFacebook?.photo} alt = 'userImage' />
-                                <BadgeCheckIcon className = 'w-4 h-4 text-blue-500' />
-                                <span className = 'font-semibold flex-1 pl-3'> {username || usernameFacebook} </span>
-                                <DotsHorizontalIcon className = 'w-5 h-5 mr-auto' />
-                           </div>
-                           <div className = 'flex flex-col flex-1 h-2/3 p-4 overflow-y-auto scrollbar-thin border-b-2'>
-                                <div className = 'flex items-center'>
-                                    <img src = {user?.photo || userFacebook?.photo} className = 'h-10 w-10 rounded-full' alt = 'userAvatar' />
-                                    <div className = 'flex flex-wrap overflow-hidden      '>
-                                            <BadgeCheckIcon className = 'w-4  ml-3 text-blue-500' />
-                                            <span className = 'font-semibold pl-2 text-sm'> {username || usernameFacebook} </span>
-                                        <span className = 'pl-3 text-sm'>{caption}</span>
+                    emojiSelected ? (
+                        <Picker onSelect = {emojiSelect} theme = 'dark' style={{ position: 'absolute', bottom: '4.5rem', left: '0' }} /> 
+                    ) : (
+                        <div className = 'hidden'></div>
+                    )
+                }
+                {openModalComment ? (
+                    <div className = 'fixed inset-0 flex  justify-center  transition duration-1000 ease-in-out z-50 p-6 bg-black bg-opacity-80' onClick = {closeModal}>
+                        <Fade>
+                            <div className = 'relative imageComment flex overflow-hidden'>
+                                <div className = 'relative h-1/2 md:h-full'>
+                                    <div onClick = { () => setOpenModalComment(false)} className = 'absolute top-6 left-6 w-12 h-12  rounded-full flex items-center justify-center border border-black border-opacity-30'>
+                                        <ChevronLeftIcon className = 'w-7 h-7 text-gray text-opacity-50 cursor-pointer' />
+                                    </div>
+                                    <img src = {img}  className = 'block max-h-full max-w-full h-full mx-auto align-middle ' />
+                                    <div className = {`${savedPost ? 'absolute bottom-0 w-full bg-white py-4 px-2 md:px-4 border-b-2 border-opacity-40' : 'hidden'}`}>
+                                        <div className = 'flex items-center justify-between'>
+                                            <span className = 'text-black font-semibold text-sm  text-center'> Your item has been saved </span>
+                                            <span onClick = {routeSavedPosts} className = 'text-blue-500 font-semibold hover:text-blue-700 cursor-pointer text-sm text-center'>View your saved posts</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className = 'my-4'>
-                                    {comments.map((comment,index) => (
-                                        <div key = {index} className = 'flex items-start py-4 cursor-pointer overflow-hidden'>
-                                            <img className = 'h-10 w-10 rounded-full' src = {comment.data().userImage} alt = 'userImage' />
-                                            <div className = 'flex flex-col flex-wrap overflow-hidden px-4'>
-                                                <div className = 'inline-block'>
-                                                    <span className = 'font-semibold text-sm'> {comment.data().userName} </span>
-                                                    <span className = 'text-sm'> {comment.data().comment} </span>
-                                                </div>
-                                                <div className = 'flex item-center space-x-2 mt-2'>
-                                                    <span className = 'text-sm text-gray-500'> <Moment fromNow date = {new Date(comment.data().timestamp?.toDate()).toUTCString()}/> </span>
-                                                    <span className = 'text-sm text-gray-500'> 1 like </span>
-                                                    <span className = 'text-sm text-gray-500'> Reply </span>
-                                                </div>
+                                <div className = 'flex flex-col w-full md:w-96 bg-gradient-to-r from-bg-pink-50 to-bg-red-50 overflow-hidden'>
+                                    <div className = 'flex items-center border-b-2 pb-3 p-4 cursor-pointer'>
+                                        <img className = 'h-10 w-10 rounded-full cursor-pointer mr-3' src = {user?.photo || userFacebook?.photo} alt = 'userImage' />
+                                        <BadgeCheckIcon className = 'w-4 h-4 text-blue-500' />
+                                        <span className = 'font-semibold flex-1 pl-3'> {username || usernameFacebook} </span>
+                                        <DotsHorizontalIcon className = 'w-5 h-5 mr-auto' />
+                                    </div>
+                                    <div className = 'flex flex-col  h-[10rem] md:h-[43rem]  p-4 overflow-hidden overflow-y-scroll scrollbar-thin border-b-2'>
+                                        <div className = 'flex items-center'>
+                                            <img src = {user?.photo || userFacebook?.photo} className = 'h-10 w-10 rounded-full' alt = 'userAvatar' />
+                                            <div className = 'flex flex-wrap overflow-hidden'>
+                                                <BadgeCheckIcon className = 'w-4  ml-3 text-blue-500' />
+                                                <span className = 'font-semibold pl-4 text-sm'> {username || usernameFacebook} </span>
+                                                <span className = 'pl-3 text-sm'>{caption}</span>
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
-                           </div>
-                           <div className = 'hidden md:flex relative flex-col border-b-2'>
-                               <div className = 'relative py-3 pb-2 flex  flex-col space-y-2'>
-                                   <div className = 'flex justify-between items-center px-4'>
-                                        <div className = 'flex items-center space-x-4'>
-                                            {
-                                                hasLiked ? (
-                                                    <HeartIconFilled onClick = {likePost} className = 'buttonIcon' />
-                                                ) : (
-                                                    <HeartIcon onClick = {likePost} className = 'buttonIcon' />
-                                                )
-                                            }
-                                            
-                                            <ChatIcon className = 'navButton' />
-                                            <PaperAirplaneIcon className = 'navButton rotate-45' />
+                                        <div className = 'my-4'>
+                                            {comments.map((comment,index) => (
+                                                <div key = {index} className = 'flex items-start py-4 cursor-pointer overflow-hidden'>
+                                                    <img className = 'h-10 w-10 rounded-full' src = {comment.data().userImage} alt = 'userImage' />
+                                                    <div className = 'flex flex-col flex-wrap overflow-hidden px-4'>
+                                                        <div className = 'inline-block'>
+                                                            <span className = 'font-semibold text-sm'> {comment.data().userName} </span>
+                                                            <span className = 'text-sm'> {comment.data().comment} </span>
+                                                        </div>
+                                                        <div className = 'flex item-center space-x-2 mt-2'>
+                                                            <span className = 'text-sm text-gray-500'> <Moment fromNow date = {new Date(comment.data().timestamp?.toDate()).toUTCString()}/> </span>
+                                                            <span className = 'text-sm text-gray-500'> 1 like </span>
+                                                            <span className = 'text-sm text-gray-500'> Reply </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
-                                        {
-                                            hasSavedPost ? (
-                                                <BookmarkIconFilled onClick = {savePost} className = 'buttonIcon' />
-                                            ) : (
-                                                <BookmarkIcon onClick = {savePost} className = 'buttonIcon' />
-                                            )
-                                        } 
-                                   </div>
-                                   <div className = 'flex flex-col gap-2 px-4'>
-                                        <span className = 'font-bold'> 
-                                            {!!likes.length && (
-                                                <>
-                                                    {likes.length < 2 ? likes.length + ' like ' : ''}
-                                                    {' '}
-                                                    {likes.length >= 2 ? likes.length + ' likes ' : ''}
-                                                </>
-                                            )}
-                                        </span>
-                                        <span className = 'text-sm text-gray-400'> <Moment fromNow date = {timestampPost} /></span>
-                                   </div>
-                                    <form onSubmit={sendComment} className = 'flex items-center md:py-2 px-4 py-2 border-t-2'>
+                                    </div>
+                                    <div className = 'hidden md:flex relative flex-col border-b-2'>
+                                        <div className = 'relative flex flex-col gap-10 p-3'>
+                                            <div className = 'flex items-center justify-between'>
+                                                <div className = 'flex items-center space-x-4'>
+                                                    {
+                                                        hasLiked ? (
+                                                            <HeartIconFilled onClick = {likePost} className = 'buttonIcon' />
+                                                        ) : (
+                                                            <HeartIcon onClick = {likePost} className = 'buttonIcon' />
+                                                        )
+                                                    }
+                                                    <ChatIcon className = 'navButton' />
+                                                    <PaperAirplaneIcon className = 'navButton rotate-45' />
+                                                </div>
+                                                {
+                                                    hasSavedPost ? (
+                                                        <BookmarkIconFilled onClick = {savePost} className = 'buttonIcon' />
+                                                    ) : (
+                                                        <BookmarkIcon onClick = {savePost} className = 'buttonIcon' />
+                                                    )
+                                                } 
+                                            </div>
+                                            <div> 
+                                                <p className = 'text-sm text-gray-400'> <Moment fromNow date = {timestampPost} /></p> 
+                                            </div>
+                                            <div className = 'absolute top-12'>
+                                                <p className = 'font-semibold'>
+                                                    {!!likes.length && (
+                                                        <>
+                                                            {likes.length < 2 ? likes.length + ' like ' : ''}
+                                                            {' '}
+                                                            {likes.length >= 2 ? likes.length + ' likes ' : ''}
+                                                        </>
+                                                    )}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form onSubmit={sendComment} className = 'flex items-center md:py-2 px-4 py-2 border-t'>
                                         {emojiSelected ? (
                                             <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-yellow-300' />
                                         ) : (
                                             <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-gray-500' />
                                         )}
-                                            <input value = {input} onChange = { (e) => setInput(e.target.value)} className = 'flex-1 apperance-none bg-transparent border-none focus:ring-transparent' type = 'text' placeholder = 'Type in here...' />
-                                            <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
-                                    </form>
-                                    {emojiSelected ? (
-                                        <Picker onSelect = {emojiSelect} style={{ position: 'absolute', bottom: '4rem', left: '0', width: '250px !important' }} /> 
-                                    ) : (
-                                        <div className = 'hidden'></div>
-                                    )
-                                    }
-                               </div>
-                           </div>
-                           <div className = 'flex flex-col md:hidden'>
-                                <form onSubmit={sendComment} className = 'flex items-center md:py-2 px-4 py-2 border-t-2'>
-                                    {emojiSelected ? (
-                                        <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-yellow-300' />
-                                    ) : (
-                                        <EmojiHappyIcon onClick = { () => setEmojiSelected(!emojiSelected)} className = 'h-7 w-7 cursor-pointer text-gray-500' />
-                                    )}
                                         <input value = {input} onChange = { (e) => setInput(e.target.value)} className = 'flex-1 apperance-none bg-transparent border-none focus:ring-transparent' type = 'text' placeholder = 'Type in here...' />
                                         <button disabled = {!input} onClick = {sendComment} type = 'button' className = {`${input ? 'text-blue-600 font-bold' : 'text-blue-300 font-500 pointer-events-none'}`}> Post </button>
-                                </form>
-                                {emojiSelected ? (
-                                        <Picker onSelect = {emojiSelect} theme = 'dark' style={{ position: 'absolute', bottom: '3.5rem', left: '0' }} /> 
-                                    ) : (
-                                        <div className = 'hidden'></div>
-                                    )
-                                }
-                           </div>
-                       </div>
-                   </div>
-                   </Fade>
-               </div>
-           ) : (
-               <div className = 'hidden'></div>
-           )}
-
+                                    </form>
+                                    {emojiSelected ? (
+                                        <Picker onSelect = {emojiSelect} theme = 'dark' style={{ position: 'absolute', bottom: '7rem', left: '0', zIndex: '1000' }} /> 
+                                        ) : (
+                                            <div className = 'hidden'></div>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        </Fade>
+                    </div>
+                ) : (
+                    <div className = 'hidden'></div>
+                )}
+           </div>
         </div>
     )
 }

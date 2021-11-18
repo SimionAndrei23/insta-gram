@@ -78,7 +78,7 @@ html {
 }
 
 .transformWidth {
-  transition: width 0.2s ease-out;
+  transition: width 0.3s ease-out;
 }
 
 .headerColor {
@@ -93,7 +93,7 @@ html {
 
 .emoji-mart 
 {
-  width: 20.5rem !important;
+  width: 22rem !important;
 }
 
 .containerImage {
@@ -106,4 +106,9 @@ html {
   .inputRef::placeholder {
     font-size: 12px;
   }
+
+  .imageComment {
+    display: block;
+  }
+
 }

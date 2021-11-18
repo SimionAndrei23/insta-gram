@@ -98,8 +98,8 @@ const ModalPost = ( {loadingConfetti,setLoadingConfetti}) => {
                     <div className = 'absolute top-0 left-0 h-full w-full clipPath2'></div>
                     <form className = 'flex flex-col items-center '>
                         {selectedFile ?  (
-                            <div onClick = {() => setSelectedFile(null)}  className = 'relative w-full h-full overflow-hidden'>
-                                <img className = 'block max-w-full max-h-full cursor-pointer' src = {selectedFile}  alt = 'SelectImage' />
+                            <div onClick = {() => setSelectedFile(null)}  className = 'relative w-full h-[16rem] overflow-hidden'>
+                                <img className = 'absolute top-0 left-0 w-full h-full object-cover cursor-pointer' src = {selectedFile}  alt = 'SelectImage' />
                             </div>
                         ) : (
                                 <div className = 'mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-red-100 cursor-pointer' onClick = { () => filePickerRef.current.click()}>
